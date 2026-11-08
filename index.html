@@ -58,8 +58,8 @@ footer{text-align:center;color:var(--muted);font-size:.8em;margin-top:24px}
 
     <!-- GANTI PASSWORD -->
     <div id="p-ganti" hidden>
-      <h1>Ganti Password</h1>
-      <p class="hint">Aktivasi member: isi data Anda, password generik dari admin, dan password baru, lalu simpan.</p>
+      <h1>Buat Password Anda</h1>
+      <p class="hint">Pendaftaran member: isi data Anda, password generik dari admin, dan password baru, lalu simpan.</p>
       <label for="g-nama">Nama</label>
       <input id="g-nama" autocomplete="name" placeholder="Nama saat mendaftar">
       <label for="g-email">Email</label>
@@ -122,7 +122,7 @@ $("btn-masuk").onclick=async function(){
       /* Server menyatakan password generik benar tapi member belum punya password sendiri */
       $("g-nama").value=nama;$("g-hp").value=$("m-hp").value;$("g-gen").value=pw;$("m-pw").value="";
       tab("ganti");
-      show("msg-ganti","ok","Aktivasi: isi email Anda dan buat password sendiri di bawah, lalu masuk.");
+      show("msg-ganti","ok","Pendaftaran: isi email Anda dan buat password sendiri di bawah, lalu masuk.");
       $("g-email").focus();
     }
     else show("msg-masuk","err","Nama, no HP, atau password tidak cocok.");
@@ -157,7 +157,7 @@ $("btn-simpan").onclick=async function(){
       $("m-nama").value=nama;$("m-hp").value=$("g-hp").value;$("m-pw").value="";
       $("g-pw").value="";$("g-gen").value="";
       tab("masuk");show("msg-masuk","ok","Password tersimpan. Silakan masuk dengan password baru Anda.");
-    }else show("msg-ganti","err","Gagal. Pastikan nama, email, no HP sama dengan data saat pendaftaran dan password generik benar. Jika Anda sudah pernah membuat password, hubungi admin untuk reset.");
+    }else show("msg-ganti","err","Gagal. Pastikan password generik benar dan data terisi lengkap. Jika no HP ini sudah pernah terdaftar, hubungi admin untuk reset.");
   }catch(e){show("msg-ganti","err",e.message)}
   busy(b,false,"Simpan Password Baru");
 };
