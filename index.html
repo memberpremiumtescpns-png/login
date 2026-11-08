@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Member Premium – tescpns.online</title>
+<style>
+:root{--bg:#f4f7fc;--card:#fff;--text:#1b2433;--muted:#5b6678;--blue:#1d4ed8;--orange:#f97316;--line:#dbe3f0;--soft:#eaf1ff;--err:#b91c1c;--ok:#15803d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1624;--card:#17203a;--text:#eef2fb;--muted:#a3aec4;--blue:#6ea0ff;--orange:#fb923c;--line:#2b3757;--soft:#1c2a4d;--err:#fca5a5;--ok:#86efac}}
+:root[data-theme="dark"]{--bg:#0f1624;--card:#17203a;--text:#eef2fb;--muted:#a3aec4;--blue:#6ea0ff;--orange:#fb923c;--line:#2b3757;--soft:#1c2a4d;--err:#fca5a5;--ok:#86efac}
+*,*::before,*::after{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;font-size:clamp(15px,1vw + 12px,17px)}
+.wrap{max-width:480px;margin:0 auto;padding:clamp(20px,5vw,56px) max(16px,env(safe-area-inset-left,0px)) 40px}
+.logo{font-size:clamp(26px,5vw,38px);font-weight:800;text-align:center;letter-spacing:-.5px}
+.logo .a{color:var(--blue)}.logo .b{color:var(--orange)}
+.badge{display:block;width:max-content;margin:10px auto 18px;background:var(--orange);color:#fff;font-weight:700;font-size:.8em;padding:3px 14px;border-radius:999px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(16px,4vw,28px)}
+h1{font-size:1.2em;margin:0 0 4px}
+.hint{color:var(--muted);font-size:.9em;margin:0 0 16px}
+label{display:block;font-weight:600;font-size:.9em;margin:12px 0 5px}
+input{width:100%;font:inherit;padding:12px;min-height:48px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text)}
+input:focus{outline:3px solid var(--orange);outline-offset:1px;border-color:var(--orange)}
+.row{display:flex;gap:8px}.row input{flex:1;min-width:0}
+.ghost{background:var(--soft);color:var(--blue);border:0;border-radius:10px;padding:0 14px;font:inherit;font-weight:700;cursor:pointer;min-height:48px}
+.go{width:100%;margin-top:18px;background:var(--orange);color:#fff;border:0;border-radius:12px;padding:14px;min-height:50px;font:inherit;font-weight:800;cursor:pointer}
+.go:disabled{opacity:.6;cursor:wait}
+.lupa{display:block;width:100%;margin-top:10px;background:var(--soft);color:var(--blue);border:0;border-radius:12px;padding:12px;min-height:48px;font:inherit;font-weight:700;cursor:pointer}
+.lupa:hover{filter:brightness(.97)}
+.msg{margin-top:14px;font-size:.92em;border-radius:10px;padding:10px 12px;display:none}
+.msg.err{display:block;background:rgba(185,28,28,.12);color:var(--err)}
+.msg.ok{display:block;background:rgba(21,128,61,.12);color:var(--ok)}
+[hidden]{display:none!important}
+footer{text-align:center;color:var(--muted);font-size:.8em;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo"><span class="a">tescpns</span><span class="b">.online</span></div>
+  <span class="badge">★ MEMBER PREMIUM</span>
+
+  <div class="card">
+    <!-- MASUK -->
+    <div id="p-masuk">
+      <h1>Masuk Member Area</h1>
+      <p class="hint">Masukkan nama, no HP, dan password Anda.</p>
+      <label for="m-nama">Nama</label>
+      <input id="m-nama" autocomplete="name" placeholder="Nama saat mendaftar">
+      <label for="m-hp">No Handphone</label>
+      <input id="m-hp" type="tel" inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx">
+      <label for="m-pw">Password</label>
+      <div class="row"><input id="m-pw" type="password" autocomplete="current-password" placeholder="Password"><button type="button" class="ghost" data-eye="m-pw">Lihat</button></div>
+      <button type="button" class="go" id="btn-masuk">Masuk Member Area</button>
+      <button type="button" class="lupa" id="btn-lupa">Lupa Password?</button>
+      <div class="msg" id="msg-masuk" role="alert"></div>
+    </div>
+
+    <!-- GANTI PASSWORD -->
+    <div id="p-ganti" hidden>
+      <h1>Ganti Password</h1>
+      <p class="hint">Aktivasi member: isi data Anda, password generik dari admin, dan password baru, lalu simpan.</p>
+      <label for="g-nama">Nama</label>
+      <input id="g-nama" autocomplete="name" placeholder="Nama saat mendaftar">
+      <label for="g-email">Email</label>
+      <input id="g-email" type="email" autocomplete="email" placeholder="email@contoh.com">
+      <label for="g-hp">No Handphone</label>
+      <input id="g-hp" type="tel" inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx">
+      <label for="g-gen">Password generik (dari admin)</label>
+      <div class="row"><input id="g-gen" type="password" autocomplete="off" placeholder="Password generik"><button type="button" class="ghost" data-eye="g-gen">Lihat</button></div>
+      <label for="g-pw">Password baru Anda (min. 8 karakter)</label>
+      <div class="row"><input id="g-pw" type="password" autocomplete="new-password" placeholder="Password baru"><button type="button" class="ghost" data-eye="g-pw">Lihat</button></div>
+      <button type="button" class="go" id="btn-simpan">Simpan Password Baru</button>
+      <button type="button" class="lupa" id="btn-kembali">Kembali ke Halaman Masuk</button>
+      <div class="msg" id="msg-ganti" role="alert"></div>
+    </div>
+  </div>
+  <footer>© tescpns.online · @tescpns.online</footer>
+</div>
+
+<script>
+/* ====== PENGATURAN ====== */
+var MEMBER_AREA_URL = "https://memberarea.premium.nskis69uspqrujck.tescpns.online";
+var ADMIN_WA = "6285196547616";  // nomor WhatsApp admin untuk reset password, format 628xxxxxxxxxx (tanpa + / spasi)
+var SUPABASE_URL = "";       // contoh: https://xxxx.supabase.co
+var SUPABASE_ANON_KEY = "";  // anon public key dari Supabase > Project Settings > API
+/* ======================== */
+
+var $ = function(id){return document.getElementById(id)};
+function normHp(v){var d=(v||"").replace(/\D/g,"");if(d.indexOf("62")===0)d="0"+d.slice(2);else if(d.charAt(0)==="8")d="0"+d;return d}
+function hpOk(h){return /^08\d{8,11}$/.test(h)}
+function show(id,type,text){var m=$(id);m.className="msg "+type;m.textContent=text}
+function clear(id){$(id).className="msg";$(id).textContent=""}
+async function rpc(fn,args){
+  if(!SUPABASE_URL||!SUPABASE_ANON_KEY)throw new Error("Supabase belum dikonfigurasi.");
+  var r=await fetch(SUPABASE_URL+"/rest/v1/rpc/"+fn,{method:"POST",headers:{"Content-Type":"application/json",apikey:SUPABASE_ANON_KEY,Authorization:"Bearer "+SUPABASE_ANON_KEY},body:JSON.stringify(args)});
+  if(!r.ok)throw new Error("Gagal terhubung ke server.");
+  return r.json();
+}
+function busy(btn,on,label){btn.disabled=on;if(label)btn.textContent=label}
+
+/* Pindah tampilan: form Ganti Password tersembunyi, hanya muncul setelah login password generik / Lupa Password */
+function tab(which){
+  var masuk=which==="masuk";
+  $("p-masuk").hidden=!masuk;$("p-ganti").hidden=masuk;
+  window.scrollTo(0,0);
+}
+document.querySelectorAll("[data-eye]").forEach(function(b){b.onclick=function(){var i=$(b.dataset.eye);var t=i.type==="password";i.type=t?"text":"password";b.textContent=t?"Sembunyi":"Lihat"}});
+
+/* Masuk */
+$("btn-masuk").onclick=async function(){
+  var b=this,nama=$("m-nama").value.trim(),hp=normHp($("m-hp").value),pw=$("m-pw").value;
+  clear("msg-masuk");
+  if(!nama||!hpOk(hp)||!pw){show("msg-masuk","err","Lengkapi nama, no HP (10-13 digit), dan password.");return}
+  busy(b,true,"Memeriksa...");
+  try{
+    var st=await rpc("login_member",{p_nama:nama,p_hp:hp,p_password:pw});
+    if(st==="ok"){show("msg-masuk","ok","Berhasil. Mengarahkan ke member area...");setTimeout(function(){location.href=MEMBER_AREA_URL},700)}
+    else if(st==="aktivasi"){
+      /* Server menyatakan password generik benar tapi member belum punya password sendiri */
+      $("g-nama").value=nama;$("g-hp").value=$("m-hp").value;$("g-gen").value=pw;$("m-pw").value="";
+      tab("ganti");
+      show("msg-ganti","ok","Aktivasi: isi email Anda dan buat password sendiri di bawah, lalu masuk.");
+      $("g-email").focus();
+    }
+    else show("msg-masuk","err","Nama, no HP, atau password tidak cocok.");
+  }catch(e){show("msg-masuk","err",e.message)}
+  busy(b,false,"Masuk Member Area");
+};
+
+/* Lupa password: reset dilakukan admin lewat WhatsApp */
+$("btn-lupa").onclick=function(){
+  clear("msg-masuk");
+  if(!/^628\d{8,12}$/.test(ADMIN_WA)){show("msg-masuk","err","Nomor WhatsApp admin belum diatur.");return}
+  var nama=$("m-nama").value.trim(),hp=normHp($("m-hp").value);
+  var t="Halo admin, saya lupa password member premium tescpns.online."+(nama?"\nNama: "+nama:"")+(hpOk(hp)?"\nNo HP: "+hp:"")+"\nMohon bantu reset password saya.";
+  window.open("https://wa.me/"+ADMIN_WA+"?text="+encodeURIComponent(t),"_blank","noopener");
+  show("msg-masuk","ok","Membuka WhatsApp admin. Setelah direset, masuk dengan password generik untuk membuat password baru.");
+};
+
+$("btn-kembali").onclick=function(){clear("msg-ganti");tab("masuk")};
+
+/* Ganti password */
+$("btn-simpan").onclick=async function(){
+  var b=this,nama=$("g-nama").value.trim(),email=$("g-email").value.trim(),hp=normHp($("g-hp").value),pw=$("g-pw").value,gen=$("g-gen").value;
+  clear("msg-ganti");
+  if(!nama||!/^\S+@\S+\.\S+$/.test(email)||!hpOk(hp)){show("msg-ganti","err","Lengkapi nama, email yang valid, dan no HP (10-13 digit).");return}
+  if(!gen){show("msg-ganti","err","Isi password generik dari admin.");return}
+  if(pw.length<8){show("msg-ganti","err","Password baru minimal 8 karakter.");return}
+  if(pw===gen){show("msg-ganti","err","Password baru tidak boleh sama dengan password generik.");return}
+  busy(b,true,"Menyimpan...");
+  try{
+    var ok=(await rpc("set_password",{p_nama:nama,p_email:email,p_hp:hp,p_generic:gen,p_password:pw}))===true;
+    if(ok){
+      $("m-nama").value=nama;$("m-hp").value=$("g-hp").value;$("m-pw").value="";
+      $("g-pw").value="";$("g-gen").value="";
+      tab("masuk");show("msg-masuk","ok","Password tersimpan. Silakan masuk dengan password baru Anda.");
+    }else show("msg-ganti","err","Gagal. Pastikan nama, email, no HP sama dengan data saat pendaftaran dan password generik benar. Jika Anda sudah pernah membuat password, hubungi admin untuk reset.");
+  }catch(e){show("msg-ganti","err",e.message)}
+  busy(b,false,"Simpan Password Baru");
+};
+</script>
+</body>
+</html>
